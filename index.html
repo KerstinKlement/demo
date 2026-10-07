@@ -1,0 +1,530 @@
+<title>Werkstatt-Assistent Demo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Kopfband, Erklärung, zweispaltige Demo (Postfach links, Kalender rechts), darunter "Was automatisch folgt". */
+:root{
+  --brand:#1F3A5F; --surface:#EEF2F7; --bg:#FFFFFF; --text:#1B2733; --muted:#566475;
+  --accent:#F28C28; --accent-text:#1B2733; --line:#C9D3E0; --card:#FFFFFF;
+  --booked:#DCE3EE; --free:#F6F8FB; --mine:#1F3A5F; --mine-text:#FFFFFF;
+  --bubble-in:#EEF2F7; --bubble-out:#1F3A5F; --bubble-out-text:#FFFFFF; --ok:#2E7D4F;
+  --font:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --brand:#1F3A5F; --surface:#16263D; --bg:#0E1A2B; --text:#E6EDF6; --muted:#9FB0C5;
+  --line:#2C4160; --card:#132238; --booked:#223552; --free:#112036; --mine:#F28C28; --mine-text:#1B2733;
+  --bubble-in:#1C2F4A; --bubble-out:#2B4C7A; --bubble-out-text:#FFFFFF; --ok:#6CC28F; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --brand:#1F3A5F; --surface:#16263D; --bg:#0E1A2B; --text:#E6EDF6; --muted:#9FB0C5;
+  --line:#2C4160; --card:#132238; --booked:#223552; --free:#112036; --mine:#F28C28; --mine-text:#1B2733;
+  --bubble-in:#1C2F4A; --bubble-out:#2B4C7A; --bubble-out-text:#FFFFFF; --ok:#6CC28F; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.5;margin:0;padding-inline:0}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:16px}
+header.top{background:var(--brand);color:#fff;padding-block:22px}
+header.top .name{font-size:24px;font-weight:700;letter-spacing:-.01em;margin:0}
+header.top .sub{font-size:14px;color:#C9D6E8;margin:2px 0 0}
+.intro{background:var(--surface);padding-block:28px 26px}
+.intro h1{font-size:clamp(24px,4vw,34px);line-height:1.15;margin:0 0 10px;text-wrap:balance;letter-spacing:-.015em}
+.intro p{margin:0;max-width:62ch;color:var(--text)}
+.note{display:inline-block;margin-top:14px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:6px 10px;background:var(--bg)}
+main{padding-block:26px 40px}
+.demo{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start}
+@media (max-width:860px){.demo{grid-template-columns:minmax(0,1fr)}}
+.panel{border:1px solid var(--line);border-radius:10px;background:var(--card);min-width:0}
+.panel>h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:0;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600}
+.panel .body{padding:16px}
+form{display:grid;gap:12px}
+label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+input[type=text]{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}
+.choices{display:grid;gap:8px}
+.choice{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:var(--bg)}
+.choice input{margin-top:4px;accent-color:var(--brand)}
+.choice b{display:block;font-weight:600}
+.choice span{font-size:13px;color:var(--muted)}
+.choice:has(input:checked){border-color:var(--brand);box-shadow:0 0 0 2px var(--brand)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .choice:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}}
+:root[data-theme="dark"] .choice:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--accent);color:var(--accent-text);border:0;border-radius:8px;padding:11px 18px;font-weight:700}
+.btn:hover{filter:brightness(.95)}
+.btn.ghost{background:transparent;border:1.5px solid var(--brand);color:var(--text);font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.ghost{border-color:var(--muted)}}
+:root[data-theme="dark"] .btn.ghost{border-color:var(--muted)}
+.btn[disabled]{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chat{display:grid;gap:10px;margin-top:16px}
+.msg{max-width:92%;border-radius:12px;padding:10px 13px;font-size:14px}
+.msg .who{display:block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.msg.in{background:var(--bubble-in);justify-self:start}
+.msg.out{background:var(--bubble-out);color:var(--bubble-out-text);justify-self:end}
+.msg p{margin:0 0 8px}.msg p:last-child{margin:0}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px}
+.slots .btn{padding:8px 12px;font-size:13px}
+.typing{font-size:13px;color:var(--muted);font-style:italic}
+.calwrap{overflow-x:auto;padding:12px;min-width:0}
+.cal{display:grid;grid-template-columns:48px repeat(10,minmax(78px,1fr));gap:3px;min-width:860px}
+.cal .h{font-size:12px;text-align:center;font-weight:600;padding:4px 0;line-height:1.25}
+.cal .h small{display:block;font-weight:400;color:var(--muted)}
+.cal .t{font-size:12px;color:var(--muted);text-align:right;padding-right:6px;display:flex;align-items:center;justify-content:flex-end}
+.cell{height:38px;border-radius:5px;font-size:11px;display:flex;align-items:center;justify-content:center;padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid transparent}
+.cell.booked{background:var(--booked);color:var(--muted)}
+.cell.free{background:var(--free);border-color:var(--line)}
+.cell.lunch{background:transparent;color:var(--muted);height:20px;font-size:10px;border:0}
+.cell.prop{background:transparent;border:2px dashed var(--accent);color:var(--text);font-weight:600;cursor:pointer}
+.cell.mine{background:var(--mine);color:var(--mine-text);font-weight:600;justify-content:flex-start}
+.status{font-size:13px;color:var(--muted);padding:0 16px 14px;min-height:30px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);padding:0 16px 14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.after{margin-top:22px}
+.after h2{font-size:20px;margin:0 0 12px;letter-spacing:-.01em}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.step{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card);min-width:0}
+.step h3{font-size:15px;margin:0 0 6px}
+.step p{margin:0 0 8px;font-size:14px}
+.step .ok{color:var(--ok);font-weight:700}
+.doc{margin-top:14px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;color:#1B2733;max-width:560px}
+.doc .dh{background:#1F3A5F;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.doc .dh b{font-size:16px}.doc .dh span{font-size:12px;letter-spacing:.08em}
+.doc table{width:100%;border-collapse:collapse;font-size:13px}
+.doc th,.doc td{padding:7px 12px;text-align:left}
+.doc th{background:#EEF2F7;font-size:12px}
+.doc td.r,.doc th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.doc tr.sum td{border-top:1px solid #C9D3E0}
+.doc tr.tot td{background:#1F3A5F;color:#fff;font-weight:700}
+.doc .df{font-size:11px;color:#566475;padding:8px 12px}
+.slogan{font-size:clamp(17px,2.4vw,20px);font-weight:700;margin:0 0 10px;color:var(--text)}
+.slogan em{font-style:normal;color:var(--brand)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .slogan em{color:var(--accent)}}
+:root[data-theme="dark"] .slogan em{color:var(--accent)}
+.vorteile{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.vorteile li{font-size:14px;font-weight:600;display:flex;gap:6px;align-items:baseline}
+.vorteile li:before{content:"✓";color:var(--ok);font-weight:700}
+.hilfe{margin:0 0 18px;font-size:14px;border-left:4px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;padding:12px 16px}
+.hilfe p{margin:0 0 6px;max-width:80ch}.hilfe p:last-child{margin:0}
+.hilfe .real{color:var(--muted)}
+footer.foot{background:var(--brand);color:#C9D6E8;padding-block:22px;font-size:13px}
+footer.foot b{color:#fff;font-size:15px}
+footer.foot p{margin:0 0 2px}
+.infos{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.info{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--card);min-width:0}
+.info h3{margin:0 0 6px;font-size:16px}
+.info p{margin:0;font-size:14px}
+.about{display:flex;gap:14px;align-items:flex-start}
+.av{flex:none;width:52px;height:52px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.cta{margin-top:28px;background:var(--surface);border-radius:10px;padding:20px 22px}
+.cta h2{margin:0 0 6px;font-size:20px}
+.cta p{margin:0;max-width:62ch}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.att{display:inline-flex;align-items:center;gap:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;margin:2px 0 10px;text-align:left;max-width:100%}
+.att .pdf{background:#C0392B;color:#fff;font-size:10px;font-weight:700;border-radius:3px;padding:3px 5px;letter-spacing:.04em}
+.att span.n{overflow-wrap:anywhere}
+.att:hover{border-color:var(--accent)}
+.ov{position:fixed;inset:0;background:rgba(10,20,35,.78);z-index:50;display:flex;flex-direction:column;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px))}
+.ovbar{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#fff;padding-bottom:10px;font-size:14px;font-weight:600}
+.ovbar .btn.ghost{color:#fff;border-color:#fff;padding:8px 14px}
+.ovbody{overflow:auto;flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start;padding-bottom:16px}
+.ovcol{width:100%;max-width:640px;flex:none}
+.paper{background:#fff;color:#1B2733;width:100%;max-width:640px;box-shadow:0 8px 30px rgba(0,0,0,.4);font-size:12px;line-height:1.45;flex:none}
+.paper .ph{background:#1F3A5F;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.paper .ph b{display:block;font-size:20px;letter-spacing:-.01em}
+.paper .ph span{font-size:11px;color:#C9D6E8}
+.paper .ph strong{font-size:18px;letter-spacing:.06em}
+.paper .pb{padding:20px 24px 14px}
+.paper .pabs{font-size:9px;color:#666;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:3px;display:inline-block}
+.paper .ptop{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.paper .prec{font-size:13px;min-width:160px}
+.paper .pinfo{background:#EEF2F7;padding:10px 14px;min-width:230px;font-size:11.5px}
+.paper .pinfo div{display:flex;justify-content:space-between;gap:12px;padding:2px 0}
+.paper .pinfo span{color:#666}.paper .pinfo b{text-align:right}
+.paper h4{font-size:14px;margin:0 0 8px}
+.paper p{margin:0 0 6px}
+.paper .tw{overflow-x:auto;margin-top:10px}
+.paper table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.45}
+.paper th.r{white-space:normal}
+.paper td:nth-child(2){overflow-wrap:anywhere;hyphens:auto}
+.paper td,.paper th{overflow-wrap:break-word}
+.paper td:first-child,.paper th:first-child{width:1%;white-space:nowrap}
+@media (max-width:520px){
+  .paper .pb{padding:16px 14px 12px}
+  .paper .ph{padding:14px}
+  .paper .pf{margin:12px 14px 0}
+  .paper table{font-size:11px}
+  .paper th{font-size:10px;padding:6px 4px}
+  .paper td{padding:6px 4px}
+  .paper .pinfo{min-width:0;width:100%}
+  .paper .tot{width:100%}
+}
+@media (max-width:350px){
+  .ovbody{padding-inline:0}.ov{padding-inline:8px}
+  .paper .pb{padding:14px 8px 10px}
+  .paper table{font-size:10px}.paper th{font-size:9px;padding:5px 2px}.paper td{padding:5px 2px}
+  .paper th:nth-child(4),.paper td:nth-child(4){display:none}
+}
+.paper th{background:#1F3A5F;color:#fff;font-size:11px;padding:7px 8px;text-align:left}
+.paper td{padding:8px;vertical-align:top;font-variant-numeric:tabular-nums}
+.paper tr.z td{background:#EEF2F7}
+.paper .r{text-align:right;white-space:nowrap}
+.paper .tot{margin:12px 0 0 auto;width:min(290px,100%);font-size:12px}
+.paper .tot div{display:flex;justify-content:space-between;padding:3px 8px}
+.paper .tot .big{background:#1F3A5F;color:#fff;font-weight:700;font-size:13px;padding:8px;margin-top:6px}
+.paper .hint{margin-top:18px}
+.paper .gruss{margin-top:14px}
+.paper .pf{border-top:1px solid #aaa;margin:14px 24px 0;padding:8px 0 14px;font-size:9.5px;color:#666}
+.paper .pf div{padding:1px 0}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<header class="top"><div class="wrap">
+  <p class="name">Kerstin Klement</p>
+  <p class="sub">KI &amp; Automatisierung</p>
+</div></header>
+
+<section class="intro"><div class="wrap">
+  <p class="slogan">Weniger Telefon und Mails. <em>Mehr Feierabend.</em></p>
+  <h1>Probieren Sie es selbst aus: Ihr digitaler Assistent beantwortet, plant und bucht</h1>
+  <p>Hier sehen Sie es am Beispiel einer Autowerkstatt: Sie stellen als Kunde eine Anfrage, der Assistent schickt ein Angebot als PDF, schaut in den Kalender, schlägt freie Termine vor und trägt den gewählten Termin ein. Das Gleiche richte ich auch für andere Branchen ein, zum Beispiel für Friseure, E-Bike-Shops, Handwerker oder Kosmetikstudios.</p>
+  <ul class="vorteile"><li>Antwortet auch abends und am Wochenende</li><li>Keine Anfrage geht mehr verloren</li><li>Für jede Branche einrichtbar</li><li>Sie geben jede Antwort frei</li></ul>
+  <span class="note">Reine Demo. Ihre Eingaben bleiben in Ihrem Browser, werden nicht gespeichert und nicht verschickt. Beim Neuladen ist alles wieder wie am Anfang.</span>
+</div></section>
+
+<main><div class="wrap">
+  <div class="hilfe">
+    <p><b>So geht's:</b> Wählen Sie links eine Anfrage aus und klicken Sie auf „Anfrage senden“. In etwa einer Minute sehen Sie, was Ihr Kunde als Antwort bekommt und was im Kalender passiert.</p>
+    <p class="real"><b>Wichtig:</b> Das ist eine Demo-Version, deshalb wählen Sie hier nur aus festen Anfragen aus. In Ihrem Betrieb schreibt der Kunde ganz normal seine E-Mail als Text. Der Assistent versteht die Nachricht, antwortet passend und kümmert sich um den Termin.</p>
+  </div>
+  <div class="demo">
+    <section class="panel" aria-labelledby="p1">
+      <h2 id="p1">1 · Postfach der Demo-Werkstatt</h2>
+      <div class="body">
+        <form id="f">
+          <div><label for="nm">Ihr Name (frei wählbar)</label><input type="text" id="nm" placeholder="z. B. Anna Beispiel" maxlength="40" autocomplete="off"></div>
+          <div>
+            <label id="wl">Was möchten Sie als Kunde anfragen?</label>
+            <div class="choices" role="radiogroup" aria-labelledby="wl">
+              <label class="choice"><input type="radio" name="svc" value="reifen" checked><div><b>Winterreifen wechseln</b><span>Kostenvoranschlag und Termin</span></div></label>
+              <label class="choice"><input type="radio" name="svc" value="wartung"><div><b>Kleine Wartung</b><span>Kostenvoranschlag und Termin</span></div></label>
+              <label class="choice"><input type="radio" name="svc" value="bremse"><div><b>Die Bremse macht Geräusche</b><span>Hier zeigt der Assistent, wo seine Grenzen liegen</span></div></label>
+            </div>
+          </div>
+          <div><button class="btn" type="submit" id="send">Anfrage senden</button></div>
+        </form>
+        <div class="chat" id="chat" aria-live="polite"></div>
+        <div class="actions" id="again" hidden><button class="btn ghost" type="button" id="reset">Von vorn beginnen</button></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="p2">
+      <h2 id="p2">2 · Kalender der Demo-Werkstatt</h2>
+      <div class="status" id="status" style="padding-top:12px">Der Assistent schaut hier hinein, sobald eine Anfrage eingeht.</div>
+      <div class="calwrap"><div class="cal" id="cal"></div></div>
+      <div class="legend">
+        <span><i style="background:var(--booked)"></i>belegt</span>
+        <span><i style="background:var(--free);border:1px solid var(--line)"></i>frei</span>
+        <span><i style="border:2px dashed var(--accent)"></i>Vorschlag</span>
+        <span><i style="background:var(--mine)"></i>Ihr Termin</span>
+      </div>
+    </section>
+  </div>
+
+  <section class="after" id="after" hidden>
+    <h2>Das passiert danach automatisch</h2>
+    <div class="steps">
+      <div class="step"><h3><span class="ok">✓</span> Termin im Kalender</h3><p id="s1"></p></div>
+      <div class="step"><h3>Erinnerung am Vortag</h3><p id="s2"></p></div>
+      <div class="step"><h3 id="s3t">Rechnung als PDF</h3><p id="s3"></p><button class="btn ghost" type="button" id="tg">Beispiel ansehen</button></div>
+    </div>
+  </section>
+
+  <section class="infos" aria-label="Gut zu wissen">
+    <div class="info"><h3>Ihre Daten bleiben bei Ihnen</h3><p>Der Assistent arbeitet in Ihrem eigenen Postfach und Ihrem eigenen Kalender. Wie mit Kundendaten umgegangen wird, besprechen wir vorher im Erstgespräch.</p></div>
+    <div class="info"><h3>Preis ohne Überraschung</h3><p>Was es kostet, hängt davon ab, was der Assistent übernehmen soll. Den Preis nennen wir Ihnen im Erstgespräch, bevor Sie sich entscheiden.</p></div>
+    <div class="info about"><div class="av" aria-hidden="true">KK</div><div><h3>Kerstin Klement</h3><p>Ich richte Betrieben digitale Assistenten ein, die Mails beantworten, Termine planen und Dokumente erstellen. Ob Werkstatt, Friseursalon oder etwas ganz anderes: Sie sprechen direkt mit mir.</p></div></div>
+  </section>
+
+  <section class="cta">
+    <h2>Das richten wir auch für Ihren Betrieb ein</h2>
+    <p>Egal ob Werkstatt, Friseursalon, Fahrradladen oder Handwerksbetrieb: Der Assistent wird auf Ihre Branche angepasst, mit Ihren Leistungen, Ihren Preisen und Ihrem Auftreten. Sie geben zu Beginn jede Antwort frei und behalten die Kontrolle. Im kostenlosen Erstgespräch klären wir, welches Programm Sie nutzen und was der Assistent für Sie übernehmen soll.</p>
+    <div class="actions"><button class="btn" type="button" id="cta1">Kostenloses Erstgespräch buchen</button></div>
+    <p id="ctas" aria-live="polite" style="margin-top:10px;font-weight:600"></p>
+  </section>
+</div></main>
+
+<footer class="foot"><div class="wrap">
+  <p><b>Kerstin Klement</b> · KI &amp; Automatisierung</p>
+  <p>Schneebergweg 31b · 95686 Fichtelberg</p>
+</div></footer>
+
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-label="Dokument ansehen">
+  <div class="ovbar"><span id="ovt"></span><button class="btn ghost" type="button" id="ovx">Schließen</button></div>
+  <div class="ovbody" id="ovb"></div>
+</div>
+
+<script>
+(function(){
+  var DAYL=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+  var DAYS=["So","Mo","Di","Mi","Do","Fr","Sa"];
+  var HOURS=[8,9,10,11,"M",13,14,15,16];
+  var BOOKED=[[8,9,10],[9,10,13,14],[8,13,14,15,16],[10,11],[8,9,15,16],[13,14],[8,9,10,11,13],[10,14,15],[9,10,11],[8,13,14]];
+  var SVC={
+    reifen:{label:"Winterreifen wechseln",short:"Reifenwechsel",n:1,price:103,doc:"Rechnung",pos:[["Material: Wuchtgewichte, Ventile",8],["Arbeit: Reifenwechsel Winterreifen (4 Räder, auf Felge, inkl. Auswuchten)",95]]},
+    wartung:{label:"Kleine Wartung",short:"Kleine Wartung",n:3,price:189,doc:"Rechnung",pos:[["Material: Motoröl, Ölfilter, Luftfilter",79],["Arbeit: Kleine Wartung",110]]},
+    bremse:{label:"Bremsen prüfen",short:"Bremsenprüfung",n:1,price:null,doc:"Kostenvoranschlag",pos:[["Material: Bremsbeläge vorn",68],["Arbeit: Bremsbeläge vorn wechseln",80]]}
+  };
+  SVC.reifen.g=12;SVC.wartung.g=12;SVC.bremse.g=24;
+  var $=function(id){return document.getElementById(id)};
+  var days=[],state={};
+
+  function eur(x){return x.toFixed(2).replace(".",",")+" €"}
+  function pad(n){return n<10?"0"+n:""+n}
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+
+  function buildDays(){
+    days=[];var d=new Date();d.setHours(12,0,0,0);
+    while(days.length<10){
+      d=new Date(d.getTime()+86400000);
+      var w=d.getDay();if(w===0||w===6)continue;
+      var i=days.length;
+      days.push({d:new Date(d.getTime()),booked:BOOKED[i].slice(),mine:{},prop:{}});
+    }
+  }
+  function dayLong(x){return DAYL[x.d.getDay()]+", "+x.d.getDate()+"."+(x.d.getMonth()+1)+"."}
+  function slotText(s){return dayLong(days[s.day])+", "+pad(s.hour)+":00 Uhr"}
+
+  function renderCal(){
+    var c=$("cal");c.textContent="";
+    c.appendChild(el("div","h",""));
+    days.forEach(function(x){
+      var h=el("div","h",DAYS[x.d.getDay()]);
+      h.appendChild(el("small","",x.d.getDate()+"."+pad(x.d.getMonth()+1)+"."));
+      c.appendChild(h);
+    });
+    HOURS.forEach(function(hr){
+      if(hr==="M"){c.appendChild(el("div","t",""));days.forEach(function(){c.appendChild(el("div","cell lunch","Mittag"))});return}
+      c.appendChild(el("div","t",pad(hr)+":00"));
+      days.forEach(function(x,di){
+        var cell;
+        if(x.mine[hr]){
+          cell=el("div","cell mine",x.mine[hr]==="first"?state.mineText:"·");cell.title=state.mineText||"";
+        }else if(x.prop[hr]){
+          cell=el("button","cell prop","Vorschlag");cell.type="button";
+          cell.setAttribute("aria-label","Termin wählen: "+slotText({day:di,hour:hr}));
+          cell.addEventListener("click",function(){choose(x.prop[hr])});
+        }else if(x.booked.indexOf(hr)>-1){cell=el("div","cell booked","belegt")}
+        else{cell=el("div","cell free","")}
+        c.appendChild(cell);
+      });
+    });
+  }
+
+  function findSlots(n){
+    var blocks=[[8,9,10,11],[13,14,15,16]],cands=[];
+    days.forEach(function(x,di){
+      blocks.forEach(function(b){
+        for(var i=0;i+n<=b.length;i++){
+          var ok=true;for(var k=0;k<n;k++){if(x.booked.indexOf(b[i+k])>-1||x.mine[b[i+k]]){ok=false;break}}
+          if(ok)cands.push({day:di,hour:b[i],n:n});
+        }
+      });
+    });
+    if(!cands.length)return[];
+    var first=cands[0],second=null;
+    for(var j=1;j<cands.length;j++){if(cands[j].day!==first.day){second=cands[j];break}}
+    if(!second&&cands.length>1)second=cands[1];
+    return second?[first,second]:[first];
+  }
+
+  function bubble(kind){
+    var m=el("div","msg "+kind);
+    m.appendChild(el("span","who",kind==="out"?"Kunde":"Assistent der Demo-Werkstatt"));
+    $("chat").appendChild(m);return m;
+  }
+  function para(m,t){var p=el("p","",t);m.appendChild(p);return p}
+  function typing(cb,ms){
+    var t=el("div","typing","Der Assistent schreibt …");$("chat").appendChild(t);
+    setTimeout(function(){t.remove();cb()},ms||900);
+  }
+
+  function start(e){
+    e.preventDefault();
+    if(state.started)return;state.started=true;
+    var name=($("nm").value||"").trim()||"Anna Beispiel";
+    var key=document.querySelector('input[name=svc]:checked').value;
+    var s=SVC[key];state.name=name;state.key=key;
+    $("send").disabled=true;
+    var m=bubble("out");
+    para(m,"Guten Tag, ich möchte gern anfragen: "+s.label+". Mein Name ist "+name+".");
+    $("status").textContent="Der Assistent schaut in den Kalender …";
+    setTimeout(function(){
+      typing(function(){
+        var slots=findSlots(s.n);state.slots=slots;
+        slots.forEach(function(sl,i){var x=days[sl.day];x.prop[sl.hour]=sl});
+        renderCal();
+        $("status").textContent="Freie Termine gefunden. Sie sind im Kalender gestrichelt markiert.";
+        var a=bubble("in");
+        para(a,"Guten Tag "+name+", vielen Dank für Ihre Anfrage.");
+        if(key==="bremse"){
+          para(a,"Wenn die Bremse Geräusche macht, kann ich aus der Ferne nichts beurteilen. Das muss sich unser Mechaniker ansehen. Bitte fahren Sie bis dahin vorsichtig. Lässt die Bremswirkung nach, fahren Sie nicht weiter und rufen Sie uns an.");
+          para(a,"Für die Prüfung kann ich Ihnen diese Termine anbieten:");
+        }else{
+          para(a,"Für "+s.label+" habe ich Ihnen einen Kostenvoranschlag erstellt. Sie finden ihn im Anhang.");
+          var ch=el("button","att");ch.type="button";
+          ch.appendChild(el("span","pdf","PDF"));ch.appendChild(el("span","n",docInfo("Kostenvoranschlag").file));
+          ch.addEventListener("click",function(){openDoc("Kostenvoranschlag",ch)});
+          a.appendChild(ch);
+          para(a,"Ich habe in unserem Kalender nachgesehen. Diese Termine sind frei:");
+        }
+        var box=el("div","slots");
+        slots.forEach(function(sl){
+          var b=el("button","btn",slotText(sl));b.type="button";
+          b.addEventListener("click",function(){choose(sl)});box.appendChild(b);
+        });
+        a.appendChild(box);
+        para(a,"Welcher Termin passt Ihnen?");
+        para(a,"Freundliche Grüße, Ihr Werkstatt-Assistent");
+      },1000);
+    },500);
+  }
+
+  function choose(sl){
+    if(state.done)return;state.done=true;state.sl=sl;
+    var s=SVC[state.key];
+    document.querySelectorAll(".slots .btn").forEach(function(b){b.disabled=true});
+    var m=bubble("out");para(m,"Der Termin am "+slotText(sl)+" passt mir.");
+    // Vorschläge entfernen, Termin eintragen
+    days.forEach(function(x){x.prop={}});
+    var x=days[sl.day];
+    for(var k=0;k<sl.n;k++){x.mine[sl.hour+k]=k===0?"first":"more"}
+    state.mineText="Werkstatt: "+state.name+", "+s.short;
+    renderCal();
+    $("status").textContent="Der Termin wurde in den Kalender eingetragen.";
+    typing(function(){
+      var a=bubble("in");
+      para(a,"Vielen Dank, "+state.name+". Ihr Termin ist eingetragen:");
+      para(a,slotText(sl)+" · "+s.short);
+      para(a,"Am Tag vorher erinnern wir Sie per Mail. Bis dann!");
+      para(a,"Freundliche Grüße, Ihr Werkstatt-Assistent");
+      after(sl,s);
+      $("again").hidden=false;
+    },900);
+  }
+
+  function after(sl,s){
+    $("after").hidden=false;
+    $("s1").textContent="„"+state.mineText+"“ steht jetzt im Kalender, "+slotText(sl)+".";
+    var vor=days[sl.day].d.getDay();
+    $("s2").textContent="„Terminerinnerung: Wir erinnern Sie an Ihren Werkstatttermin morgen, "+dayLong(days[sl.day])+" um "+pad(sl.hour)+":00 Uhr ("+s.short+"). Falls Sie nicht kommen können, antworten Sie einfach auf diese Mail.“";
+    state.docKind=s.doc;
+    if(s.doc==="Rechnung"){
+      $("s3t").textContent="Rechnung als PDF";
+      $("s3").textContent="Nach der Reparatur geht die Rechnung automatisch als PDF an den Kunden, im Design Ihres Betriebs.";
+      $("tg").textContent="Rechnung ansehen";
+    }else{
+      $("s3t").textContent="Kostenvoranschlag als PDF";
+      $("s3").textContent="Nach der Prüfung bekommt der Kunde einen Kostenvoranschlag als PDF, bevor etwas repariert wird.";
+      $("tg").textContent="Kostenvoranschlag ansehen";
+    }
+  }
+
+  function fmtDate(d){return pad(d.getDate())+"."+pad(d.getMonth()+1)+"."+d.getFullYear()}
+  function docBase(kind){
+    if(kind==="Rechnung"&&state.sl)return days[state.sl.day].d;
+    return new Date();
+  }
+  function docInfo(kind){
+    var b=docBase(kind);
+    var no=(kind==="Rechnung"?"R-":"KV-")+b.getFullYear()+pad(b.getMonth()+1)+pad(b.getDate())+"-01";
+    return {no:no,file:(kind==="Rechnung"?"Rechnung_":"Kostenvoranschlag_")+no+".pdf"};
+  }
+
+  function paper(kind){
+    var s=SVC[state.key],isRe=kind==="Rechnung",base=docBase(kind),info=docInfo(kind);
+    var due=new Date(base.getTime()+(isRe?14:28)*86400000);
+    var p=el("div","paper");
+    var hd=el("div","ph"),l=el("div");
+    l.appendChild(el("b","","Demo-Werkstatt"));l.appendChild(el("span","","Kfz-Service · Reparatur · Wartung"));
+    hd.appendChild(l);hd.appendChild(el("strong","",kind.toUpperCase()));p.appendChild(hd);
+    var b=el("div","pb");
+    b.appendChild(el("div","pabs","Demo-Werkstatt · Schneebergweg 31b · 95686 Fichtelberg"));
+    var top=el("div","ptop"),rec=el("div","prec");
+    [state.name,"Beispielweg 5","12345 Musterstadt"].forEach(function(t){rec.appendChild(el("div","",t))});
+    var inf=el("div","pinfo");
+    var rows=[[isRe?"Rechnungsnummer:":"Nummer:",info.no],["Datum:",fmtDate(base)],["Fahrzeug:","VW Golf VII"]];
+    if(isRe){rows.push(["Leistungsdatum:",fmtDate(base)]);rows.push(["Zahlungsziel:",fmtDate(due)])}
+    else rows.push(["Gültig bis:",fmtDate(due)]);
+    rows.forEach(function(r){var d=el("div");d.appendChild(el("span","",r[0]));d.appendChild(el("b","",r[1]));inf.appendChild(d)});
+    top.appendChild(rec);top.appendChild(inf);b.appendChild(top);
+    b.appendChild(el("h4","",kind+" Nr. "+info.no));
+    b.appendChild(el("p","","Guten Tag "+state.name+","));
+    b.appendChild(el("p","",isRe?"für die folgende Leistung an Ihrem Fahrzeug berechnen wir Ihnen:":"gern bieten wir Ihnen die folgende Leistung an Ihrem Fahrzeug an:"));
+    var tw=el("div","tw"),t=el("table"),hr=el("tr");
+    [["Pos.",""],["Beschreibung",""],["Menge","r"],["Einzel (netto)","r"],["Gesamt (netto)","r"]].forEach(function(c){hr.appendChild(el("th",c[1],c[0]))});
+    t.appendChild(hr);
+    var gross=0;
+    s.pos.forEach(function(q,i){
+      var tr=el("tr",i%2===0?"z":"");
+      tr.appendChild(el("td","",String(i+1)));tr.appendChild(el("td","",q[0]));tr.appendChild(el("td","r","1"));
+      tr.appendChild(el("td","r",eur(q[1]/1.19)));tr.appendChild(el("td","r",eur(q[1]/1.19)));t.appendChild(tr);gross+=q[1];
+    });
+    tw.appendChild(t);b.appendChild(tw);
+    var net=gross/1.19,tot=el("div","tot");
+    [["Zwischensumme (netto)",eur(net)],["zzgl. 19 % MwSt.",eur(gross-net)]].forEach(function(r){var d=el("div");d.appendChild(el("span","",r[0]));d.appendChild(el("span","",r[1]));tot.appendChild(d)});
+    var big=el("div","big");big.appendChild(el("span","",isRe?"Rechnungsbetrag":"Gesamtpreis"));big.appendChild(el("span","",eur(gross)));tot.appendChild(big);
+    b.appendChild(tot);
+    var h=el("div","hint");
+    if(isRe){
+      h.appendChild(el("p","","Auf die ausgeführte Arbeit gewähren wir "+s.g+" Monate Garantie."));
+      h.appendChild(el("p","","Bitte überweisen Sie den Rechnungsbetrag bis zum "+fmtDate(due)+" unter Angabe der Rechnungsnummer."));
+    }else{
+      h.appendChild(el("p","","Alle Preise verstehen sich inklusive 19 % MwSt. Dieses Angebot gilt bis zum "+fmtDate(due)+"."));
+      h.appendChild(el("p","","Bei Rückfragen oder zur Terminvereinbarung antworten Sie einfach auf diese Mail."));
+    }
+    b.appendChild(h);
+    var g=el("div","gruss");g.appendChild(el("p","",isRe?"Vielen Dank für Ihr Vertrauen!":"Wir freuen uns auf Ihren Auftrag!"));g.appendChild(el("p","","Freundliche Grüße"));g.appendChild(el("p","","Ihre Demo-Werkstatt"));
+    b.appendChild(g);p.appendChild(b);
+    var f=el("div","pf");
+    ["Demo-Werkstatt · Inhaberin Kerstin Klement · Schneebergweg 31b · 95686 Fichtelberg","Bankverbindung (Beispiel): IBAN DE00 0000 0000 0000 0000 00 · BIC XXXXDEXX · USt-IdNr. DE000000000 (Beispiel)","Demo: Alle Angaben und Preise sind Beispielwerte."].forEach(function(t){f.appendChild(el("div","",t))});
+    p.appendChild(f);
+    return p;
+  }
+
+  var lastFocus=null;
+  var pushed=false,skipPop=false;
+  function openDoc(kind,from){
+    lastFocus=from||null;
+    $("ovt").textContent=docInfo(kind).file;
+    var body=$("ovb");body.textContent="";
+    var col=el("div","ovcol");col.appendChild(paper(kind));
+    var back=el("button","btn","Zurück");back.type="button";back.style.cssText="margin:16px auto 0;display:block";
+    back.addEventListener("click",closeDoc);col.appendChild(back);body.appendChild(col);
+    body.scrollTop=0;
+    $("ov").hidden=false;$("ovx").focus();
+    try{history.pushState({kkdoc:1},"");pushed=true}catch(e){pushed=false}
+  }
+  function closeDoc(){
+    $("ov").hidden=true;
+    if(pushed){pushed=false;skipPop=true;try{history.back()}catch(e){skipPop=false}}
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  window.addEventListener("popstate",function(){
+    if(skipPop){skipPop=false;return}
+    if(!$("ov").hidden){pushed=false;$("ov").hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  });
+
+  function reset(){
+    state={};$("chat").textContent="";$("again").hidden=true;$("after").hidden=true;$("ov").hidden=true;
+    $("send").disabled=false;$("nm").value="";
+    $("status").textContent="Der Assistent schaut hier hinein, sobald eine Anfrage eingeht.";
+    buildDays();renderCal();
+  }
+
+  $("f").addEventListener("submit",start);
+  $("reset").addEventListener("click",reset);
+  $("tg").addEventListener("click",function(){openDoc(state.docKind,$("tg"))});
+  $("ovx").addEventListener("click",closeDoc);
+  $("ov").addEventListener("click",function(e){if(e.target===$("ov")||e.target===$("ovb"))closeDoc()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("ov").hidden)closeDoc()});
+  $("cta1").addEventListener("click",function(){$("ctas").textContent="Das Buchen eines Erstgesprächs ist in Arbeit. Bald können Sie hier direkt einen Termin vereinbaren oder per E-Mail oder WhatsApp schreiben."});
+  reset();
+})();
+</script>
