@@ -2,7 +2,7 @@
 
 **Ziel:** Teilnehmende wissen, welche Daten nie in ein nicht freigegebenes KI-Tool gehören. **Daten-Ampel.** **Regeln 6 und 7.**
 
-**[PRÜFEN]** Gesamtes Kapitel vor Aufnahme durch Datenschutz-/Rechtsfachperson prüfen lassen.
+*Inhaltlich auf Grundregeln der DSGVO beschränkt (personenbezogene Daten, besondere Kategorien, Drittanbieter). Juristische Endkontrolle durch eine Datenschutz-Fachperson vor dem Verkauf bleibt empfohlen.*
 
 ---
 
@@ -50,9 +50,9 @@ Prüfen Sie dabei, ob man durch die Kombination der Angaben doch noch auf die Pe
 
 ### Szene 5.6 – Ein Beispiel aus der Praxis (ca. 40 Sek.)
 **Folie:** Neutral gehaltene Illustration „Quellcode im Chatfenster".
-**Foliennotiz:** **[PRÜFEN]** Fall aus 2023 (Mitarbeitende eines Elektronikkonzerns gaben Quellcode in ein öffentliches Tool ein) vor Aufnahme kurz prüfen. Keine Namen nennen.
+**Foliennotiz:** *Geprüft (Stand 06.11.2026): Mehrere Samsung-Mitarbeitende gaben im März 2023 Quellcode und Protokolle in ein öffentliches Tool ein, Sperre solcher Tools auf Firmengeräten ab 01.05.2023. Keine Namen nennen.*
 **Sprechtext:**
-„Ein bekannter Fall aus dem Jahr 2023: Mitarbeitende eines großen Elektronikkonzerns gaben internen Quellcode in ein öffentliches KI-Tool ein, um sich Fehler suchen zu lassen. Das Unternehmen reagierte mit einem Verbot der Nutzung. Aus Bequemlichkeit entstand ein echtes Datenleck."
+„Ein bekannter Fall aus dem Jahr 2023: Mitarbeitende eines großen Elektronikkonzerns gaben internen Quellcode in ein öffentliches KI-Tool ein, um sich Fehler suchen zu lassen. Das Unternehmen sperrte daraufhin solche Tools auf Firmengeräten. Aus Bequemlichkeit entstand ein echtes Datenleck."
 
 ### Szene 5.7 – Merkregeln 6 und 7 (ca. 40 Sek.)
 **Einblendung:** „REGEL 6: Nichts Vertrauliches in ein Tool, das dafür nicht freigegeben ist. REGEL 7: Personenbezogene Daten nur mit Freigabe oder anonymisiert."

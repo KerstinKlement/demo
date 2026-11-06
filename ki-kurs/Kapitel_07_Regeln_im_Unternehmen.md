@@ -37,7 +37,7 @@
 **Sprechtext:**
 „Und wenn doch einmal etwas schiefgeht? Zum Beispiel haben Sie aus Versehen einen Kundennamen oder eine vertrauliche Datei in ein nicht freigegebenes Tool eingegeben. Drei Schritte. Erstens: Stopp, nichts weiter eingeben. Zweitens: Sofort melden, an [ANSPRECHPERSON/STELLE]. Drittens: gemeinsam aufarbeiten.
 Warum sofort? Weil bei Datenpannen oft kurze Fristen laufen. Je früher Ihr Unternehmen davon weiß, desto mehr kann es tun. Und niemand wird Ihnen den Kopf abreißen, weil Sie ehrlich waren. Verschweigen ist das, was es richtig teuer macht."
-**Foliennotiz:** **[PRÜFEN]** Meldefristen (z. B. DSGVO) mit Datenschutzfachperson abstimmen, bevor Fristen genannt werden. In der Standardfassung keine konkrete Stundenzahl nennen.
+**Foliennotiz:** *Hinweis: Art. 33 DSGVO sieht für die Meldung an die Aufsichtsbehörde grundsätzlich 72 Stunden vor. Im Kurs bleibt es bewusst bei „oft kurze Fristen"; die konkrete Frist legt der Datenschutzbeauftragte des Kunden fest.*
 
 ### Szene 7.6 – Merkregel 9 (ca. 20 Sek.)
 **Einblendung:** „REGEL 9: Nur freigegebene Tools, dienstliche Zugänge. Im Zweifel fragen."

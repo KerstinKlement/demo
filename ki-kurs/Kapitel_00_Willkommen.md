@@ -20,8 +20,8 @@ In den nächsten gut sechzig Minuten zeige ich Ihnen, wie Sie künstliche Intell
 „Warum gibt es diese Schulung? Drei Gründe.
 Erstens: Nutzen. KI kann Ihnen jeden Tag Zeit sparen – bei Mails, Zusammenfassungen, Ideen, Übersetzungen.
 Zweitens: Sicherheit. Es gibt ein paar Fehler, die man mit KI sehr leicht macht – zum Beispiel vertrauliche Daten dort einzutippen, wo sie nicht hingehören. Die lassen sich vermeiden. Ich zeige Ihnen, wie.
-Und drittens: Pflicht. Unternehmen, die KI einsetzen, müssen dafür sorgen, dass ihre Mitarbeitenden damit umgehen können. In der EU steht das so im KI-Gesetz. Diese Schulung ist Ihr Nachweis dafür. Am Ende gibt es ein Zertifikat."
-**[PRÜFEN]** Formulierung zu Art. 4 vor Aufnahme gegen aktuellen Rechtsstand abgleichen.
+Und drittens: Pflicht. Unternehmen, die KI einsetzen, müssen die KI-Kompetenz ihrer Mitarbeitenden fördern. In der EU steht das so im KI-Gesetz. Diese Schulung ist Ihr Nachweis dafür. Am Ende gibt es ein Zertifikat."
+*Geprüft (Stand 06.11.2026): Art. 4 KI-Verordnung gilt seit 02.02.2025, seit Juli 2026 in der Fassung der Verordnung (EU) 2026/1744 („Digital-Omnibus"): Unternehmen müssen Maßnahmen zur Förderung der KI-Kompetenz ergreifen.*
 
 ### Szene 0.3 – Der Praktikant (ca. 50 Sek.)
 **Folie:** Illustration: kleiner, eifriger Praktikant mit Kaffeetasse und riesigem Stapel Papier, strahlt.

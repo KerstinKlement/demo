@@ -55,16 +55,16 @@
 - C) Die Mail privat an sich selbst weiterleiten und im Privat-Account nutzen.
 
 **11 (Kap. 6)** Warum gibt es diese Schulung (u. a.)?
-- A) Weil Unternehmen laut KI-Verordnung für ausreichende KI-Kompetenz ihrer Mitarbeitenden sorgen müssen. ✔
+- A) Weil Unternehmen laut KI-Verordnung Maßnahmen zur Förderung der KI-Kompetenz ihrer Mitarbeitenden ergreifen müssen. ✔
 - B) Weil KI-Tools sonst nicht funktionieren.
 - C) Weil das Zertifikat für den Zugang zum Tool nötig ist.
-**[PRÜFEN]** Aktuelle Rechtslage vor Veröffentlichung abgleichen.
+*Geprüft (Stand 06.11.2026) gegen Art. 4 in der Fassung der VO (EU) 2026/1744.*
 
 **12 (Kap. 6)** Was gilt beim Urheberrecht in der Regel?
 - A) Alles, was die KI erzeugt, gehört automatisch mir und ist geschützt.
 - B) Fremde geschützte Werke dürfen ohne Erlaubnis beliebig ins Tool kopiert werden.
 - C) Rein KI-erzeugte Ergebnisse sind meist nicht urheberrechtlich geschützt, und fremde Rechte müssen beachtet werden. ✔
-**[PRÜFEN]** Von Fachperson bestätigen lassen.
+*Geprüft: BMJV-FAQ KI und Urheberrecht.*
 
 **13 (Kap. 7)** Welches Tool dürfen Sie nutzen?
 - A) Jedes, das kostenlos ist.
@@ -99,4 +99,4 @@
 >
 > *Diese Bescheinigung dient als Nachweis der Schulung im Sinne der KI-Kompetenz (Art. 4 EU-KI-Verordnung). Sie stellt keine Rechtsberatung dar.*
 
-**[PRÜFEN]** Formulierung des letzten Satzes mit Rechtsfachperson abstimmen. Keine Zusicherung „erfüllt gesetzliche Pflicht", nur „dient als Nachweis".
+*Hinweis: Der letzte Satz sagt bewusst nur „dient als Nachweis", nicht „erfüllt die gesetzliche Pflicht". Eine juristische Endkontrolle des Wortlauts vor dem Verkauf bleibt empfohlen.*

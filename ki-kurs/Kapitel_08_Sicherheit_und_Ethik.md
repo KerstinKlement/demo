@@ -19,9 +19,9 @@
 ### Szene 8.3 – Deepfakes und Stimmen-Klone (ca. 1 Min. 20 Sek.)
 **Folie:** Videocall mit mehreren Gesichtern, eines mit Glitch.
 **Einblendung:** „Auch Bild und Ton lassen sich fälschen."
-**Foliennotiz:** **[PRÜFEN]** Fall Hongkong 2024 (Videokonferenz mit gefälschten Führungskräften, Schaden rund 25 Mio. US-Dollar) vor Aufnahme gegenchecken.
+**Foliennotiz:** *Geprüft (Stand 06.11.2026): Anfang 2024, Hongkong, Videokonferenz mit gefälschten Führungskräften, 200 Mio. HK-Dollar (rund 25 Mio. US-Dollar), später als Ingenieurbüro Arup bestätigt. Keinen Firmennamen nennen.*
 **Sprechtext:**
-„Noch eine Stufe weiter: Deepfakes. KI kann Gesichter und Stimmen so nachbilden, dass man sie kaum vom Original unterscheidet. 2024 wurde ein Mitarbeiter eines Unternehmens in Hongkong in einer Videokonferenz von scheinbar bekannten Führungskräften angewiesen, eine hohe Summe zu überweisen. Alle anderen Teilnehmenden waren Fälschungen. Der Schaden: viele Millionen.
+„Noch eine Stufe weiter: Deepfakes. KI kann Gesichter und Stimmen so nachbilden, dass man sie kaum vom Original unterscheidet. 2024 wurde ein Mitarbeiter eines Unternehmens in Hongkong in einer Videokonferenz von scheinbar bekannten Führungskräften angewiesen, eine hohe Summe zu überweisen. Alle anderen Teilnehmenden waren Fälschungen. Der Schaden: umgerechnet rund 25 Millionen US-Dollar.
 Was hilft? Eine einfache Regel: Bei ungewöhnlichen Zahlungs- oder Datenwünschen immer über einen zweiten, bekannten Kanal rückfragen. Rufen Sie die Person unter der Nummer an, die Sie schon haben, nicht unter der, die in der Nachricht steht. Manche Teams vereinbaren auch ein Codewort."
 
 ### Szene 8.4 – Prompt Injection (ca. 50 Sek.)

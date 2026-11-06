@@ -67,11 +67,18 @@ Mitarbeitende ohne Vorwissen können nach ca. 65 Minuten Video + Test KI-Tools i
 | | **Summe** | **64** | **ca. 8.900** |
 | 11 | Wissenstest + Zertifikat (ohne Video) | 10–15 | – |
 
-## Vor Verkauf/Aufnahme zu PRÜFEN (mit [PRÜFEN] im Text markiert)
-- Aktueller Stand von Art. 4 und Art. 50 EU-KI-Verordnung (Änderungsvorschläge/Fristen auf EU-Ebene)
-- Rechtsprüfung der Kapitel 5 und 6 durch Datenschutz-/Rechtsfachperson
-- Haftungsausschluss/Hinweis „keine Rechtsberatung" im Kurs und auf Zertifikat
-- Beispiele (Fälle aus der Presse) kurz gegenchecken, bevor sie gesprochen werden
+## Faktenprüfung (Stand 06.11.2026, durchgeführt)
+- Mata v. Avianca (S.D.N.Y., 2023): bestätigt, 5.000 US-Dollar Strafe.
+- Moffatt v. Air Canada (Civil Resolution Tribunal British Columbia, 14.02.2024): bestätigt. Es war ein Tribunal (Schiedsgericht), kein ordentliches Gericht.
+- Samsung 2023: bestätigt (Quellcode und Protokoll in öffentlichem Tool, Sperre auf Firmengeräten ab 01.05.2023).
+- Hongkong 2024: bestätigt (rund 25 Mio. US-Dollar, später als Arup bestätigt).
+- Art. 4 KI-VO: gilt seit 02.02.2025; seit Juli 2026 durch VO (EU) 2026/1744 („Digital-Omnibus") abgeschwächt auf „Maßnahmen zur Förderung der KI-Kompetenz". Kurs entsprechend angepasst.
+- Art. 50 KI-VO (Transparenz): gilt seit 02.08.2026.
+- Hochrisiko-Pflichten (z. B. Personalauswahl): verschoben auf 02.12.2027.
+- Urheberrecht: BMJV-FAQ bestätigt, dass rein KI-basierte Inhalte nicht geschützt sind.
+
+## Weiterhin empfohlen vor dem Verkauf
+- Juristische Endkontrolle der Kapitel 5 und 6 und des Zertifikat-Wortlauts durch eine Fachperson. Der Kurs ist keine Rechtsberatung.
 
 ## KORREKTUR Laufzeit (nach Schreiben der Sprechtexte)
 Gezählter Sprechtext Kap. 0–10: ca. 4.000 Wörter = ca. 29 Min. reine Sprechzeit bei 140 Wörtern/Min.

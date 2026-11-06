@@ -20,10 +20,10 @@ Und warum? Erinnern Sie sich: Das Modell produziert, was plausibel klingt – ni
 ### Szene 4.3 – Zwei echte Fälle (ca. 1 Min. 20 Sek.)
 **Folie:** Zwei Zeitungsschnipsel-Optik (neutral gestaltet, ohne Logos).
 **Einblendung:** „Das ist wirklich passiert."
-**Foliennotiz:** **[PRÜFEN]** Beide Fälle vor Aufnahme kurz gegenchecken (Jahr/Details).
+**Foliennotiz:** *Geprüft (Stand 06.11.2026): Mata v. Avianca (S.D.N.Y., Juni 2023, 5.000 US-Dollar Strafe) und Moffatt v. Air Canada (Civil Resolution Tribunal British Columbia, 14.02.2024, 2024 BCCRT 149).*
 **Sprechtext:**
-„Zwei Fälle, die wirklich passiert sind. In den USA hat 2023 ein Anwalt für ein Gerichtsverfahren Urteile zitiert, die ihm eine KI geliefert hatte. Die Urteile gab es gar nicht. Das gab richtig Ärger vor Gericht.
-Und 2024 musste eine Fluggesellschaft zu einer falschen Auskunft ihres Chatbots stehen – ein Gericht entschied, dass das Unternehmen für die Auskunft haftet.
+„Zwei Fälle, die wirklich passiert sind. In den USA hat 2023 ein Anwalt für ein Gerichtsverfahren Urteile zitiert, die ihm eine KI geliefert hatte. Die Urteile gab es gar nicht. Das Gericht verhängte eine Geldstrafe von 5.000 US-Dollar.
+Und 2024 musste eine Fluggesellschaft zu einer falschen Auskunft ihres Chatbots stehen – ein Schiedsgericht in Kanada entschied, dass die Airline für die Auskunft haftet.
 Die Lehre: Wer KI-Ergebnisse ungeprüft weitergibt, hat ein Problem. Nicht die KI."
 
 ### Szene 4.4 – Weitere Fehlerquellen (ca. 50 Sek.)
