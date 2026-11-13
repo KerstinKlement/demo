@@ -264,7 +264,7 @@ footer a:hover{text-decoration:underline}
     <div>
       <span class="eyebrow">Live-Demo · dauert etwa 1 Minute</span>
       <h1>Weniger Telefon und Mails.<br><em>Mehr Feierabend.</em></h1>
-      <p class="lead">Probieren Sie selbst aus, wie Ihr digitaler Assistent eine Kundenanfrage beantwortet, ein Angebot schickt und den Termin einträgt. Sie wählen Ihre Branche und geben jede Antwort selbst frei.</p>
+      <p class="lead">Probieren Sie selbst aus, wie Ihr digitaler Assistent eine Kundenanfrage beantwortet, auf Wunsch ein Angebot schickt und den Termin einträgt. Sie wählen Ihre Branche und geben jede Antwort selbst frei.</p>
       <div class="heroact">
         <a class="btn" href="#demo">Demo selbst ausprobieren ↓</a>
         <button class="btn light" type="button" id="tourBtn">▶ Ablauf ansehen</button>
@@ -274,8 +274,8 @@ footer a:hover{text-decoration:underline}
     <div class="preview" aria-hidden="true">
       <div class="bar"><b></b><b></b><b></b><span class="t">Posteingang</span></div>
       <div class="pv">
-        <div class="msg out"><span class="who">Kunde</span>Guten Tag, ich möchte meine Winterreifen wechseln lassen.</div>
-        <div class="msg in"><span class="who">Assistent</span>Gern! Ihr Kostenvoranschlag ist im Anhang.<br><span class="att"><i>PDF</i>Kostenvoranschlag.pdf</span><div class="slots"><span class="slot">Mo, 11:00 Uhr</span><span class="slot">Di, 8:00 Uhr</span></div></div>
+        <div class="msg out"><span class="who">Kunde</span>Guten Tag, was kostet eine kleine Wartung und wann hätten Sie Zeit?</div>
+        <div class="msg in"><span class="who">Assistent</span>Gern! Den Kostenvoranschlag finden Sie im Anhang.<br><span class="att"><i>PDF</i>Kostenvoranschlag.pdf</span><div class="slots"><span class="slot">Mo, 11:00 Uhr</span><span class="slot">Di, 8:00 Uhr</span></div></div>
       </div>
     </div>
   </div>
@@ -420,30 +420,30 @@ footer a:hover{text-decoration:underline}
     werkstatt:{label:"Werkstatt",icon:"car",biz:"Demo-Werkstatt",sub:"Kfz-Service · Reparatur · Wartung",obj:["Fahrzeug:","VW Golf VII"],sig:"Ihr Team der Demo-Werkstatt",
       names:["Hr. Wagner · Inspektion","Fr. Sommer · TÜV","Fr. Kaya · Reifen","Hr. Roth · Ölwechsel","Fr. Lange · Klima","Hr. Berg · Bremse","Hr. Lenz · Auspuff","Fr. Graf · Licht"],
       svc:[
-        {k:"a",icon:"tire",label:"Winterreifen wechseln",hint:"Kostenvoranschlag und Termin",ask:"ich möchte meine Winterreifen wechseln lassen. Wann hätten Sie Zeit?",short:"Reifenwechsel",n:1,pos:[["Material: Wuchtgewichte, Ventile",8],["Arbeit: Reifenwechsel, 4 Räder auf Felge, inkl. Auswuchten",95]],doc:"Rechnung",g:"12 Monate Garantie auf die ausgeführte Arbeit."},
-        {k:"b",icon:"wrench",label:"Kleine Wartung",hint:"Kostenvoranschlag und Termin",ask:"mein Auto braucht eine kleine Wartung. Was kostet das und wann geht es?",short:"Kleine Wartung",n:3,pos:[["Material: Motoröl, Ölfilter, Luftfilter",79],["Arbeit: Kleine Wartung nach Herstellervorgabe",110]],doc:"Rechnung",g:"12 Monate Garantie auf die ausgeführte Arbeit."},
+        {k:"a",icon:"tire",label:"Winterreifen wechseln",hint:"Nur Termin gewünscht",ask:"ich möchte meine Winterreifen wechseln lassen. Wann hätten Sie Zeit?",short:"Reifenwechsel",n:1,pos:[["Material: Wuchtgewichte, Ventile",8],["Arbeit: Reifenwechsel, 4 Räder auf Felge, inkl. Auswuchten",95]],doc:"Rechnung",g:"12 Monate Garantie auf die ausgeführte Arbeit."},
+        {k:"b",icon:"wrench",label:"Kleine Wartung",hint:"Fragt nach dem Preis: mit Kostenvoranschlag",kv:1,ask:"mein Auto braucht eine kleine Wartung. Was kostet das und wann geht es?",short:"Kleine Wartung",n:3,pos:[["Material: Motoröl, Ölfilter, Luftfilter",79],["Arbeit: Kleine Wartung nach Herstellervorgabe",110]],doc:"Rechnung",g:"12 Monate Garantie auf die ausgeführte Arbeit."},
         {k:"c",icon:"warn",label:"Die Bremse macht Geräusche",hint:"Hier zeigt der Assistent seine Grenzen",ask:"meine Bremse quietscht seit ein paar Tagen. Können Sie sich das ansehen?",short:"Bremsenprüfung",n:1,limit:"Wenn die Bremse Geräusche macht, kann ich das aus der Ferne nicht beurteilen. Das muss sich unser Mechaniker ansehen. Bitte fahren Sie bis dahin vorsichtig. Lässt die Bremswirkung nach, fahren Sie nicht weiter und rufen Sie uns an.",pos:[["Material: Bremsbeläge vorn",68],["Arbeit: Bremsbeläge vorn wechseln",80]],doc:"Kostenvoranschlag"}
       ]},
     friseur:{label:"Friseur",icon:"scissors",biz:"Salon Demo",sub:"Schnitt · Farbe · Styling",obj:["Stylistin:","Lena"],sig:"Ihr Team vom Salon Demo",
       names:["Fr. Wolf · Schnitt","Hr. Peters · Bart","Fr. Yilmaz · Farbe","Fr. Koch · Strähnen","Hr. Klein · Schnitt","Fr. Bauer · Föhnen","Fr. Arndt · Farbe","Hr. Vogel · Schnitt"],
       svc:[
-        {k:"a",icon:"scissors",label:"Haare schneiden und föhnen",hint:"Preis und Termin",ask:"ich hätte gern einen Termin zum Schneiden und Föhnen.",short:"Schnitt und Föhnen",n:1,pos:[["Waschen, Schneiden, Föhnen (mittellanges Haar)",48]],doc:"Rechnung"},
-        {k:"b",icon:"brush",label:"Strähnen und Schnitt",hint:"Preis und Termin",ask:"ich möchte Strähnen und einen neuen Schnitt. Was kostet das ungefähr?",short:"Strähnen und Schnitt",n:3,pos:[["Strähnen in Folientechnik, inkl. Pflege",75],["Waschen, Schneiden, Föhnen",48]],doc:"Rechnung"},
-        {k:"c",icon:"warn",label:"Kopfhaut juckt nach dem Färben",hint:"Hier zeigt der Assistent seine Grenzen",ask:"nach dem letzten Färben juckt meine Kopfhaut stark. Was soll ich tun?",short:"Beratung Kopfhaut",n:1,limit:"Das kann ich aus der Ferne nicht beurteilen. Bitte färben Sie vorerst nicht und waschen Sie die Haare nur mit mildem Shampoo. Wenn die Haut gerötet oder geschwollen ist, gehen Sie bitte zu Ihrer Hausärztin. Gern berät Sie unsere Meisterin persönlich und macht einen Verträglichkeitstest.",pos:[["Kopfhaut-Analyse und Beratung",15],["Sanfte Pflanzenfarbe inkl. Schnitt",89]],doc:"Kostenvoranschlag"}
+        {k:"a",icon:"scissors",label:"Haare schneiden und föhnen",hint:"Nur Termin gewünscht",ask:"ich hätte gern einen Termin zum Schneiden und Föhnen.",short:"Schnitt und Föhnen",n:1,pos:[["Waschen, Schneiden, Föhnen (mittellanges Haar)",48]],doc:"Rechnung"},
+        {k:"b",icon:"brush",label:"Strähnen und Schnitt",hint:"Fragt nach dem Preis",price:1,ask:"ich möchte Strähnen und einen neuen Schnitt. Was kostet das ungefähr?",short:"Strähnen und Schnitt",n:3,pos:[["Strähnen in Folientechnik, inkl. Pflege",75],["Waschen, Schneiden, Föhnen",48]],doc:"Rechnung"},
+        {k:"c",icon:"warn",label:"Kopfhaut juckt nach dem Färben",hint:"Hier zeigt der Assistent seine Grenzen",ask:"nach dem letzten Färben juckt meine Kopfhaut stark. Was soll ich tun?",short:"Beratung Kopfhaut",n:1,limit:"Das kann ich aus der Ferne nicht beurteilen. Bitte färben Sie vorerst nicht und waschen Sie die Haare nur mit mildem Shampoo. Wenn die Haut gerötet oder geschwollen ist, gehen Sie bitte zu Ihrer Hausärztin. Gern berät Sie unsere Meisterin persönlich und macht einen Verträglichkeitstest.",pos:[["Kopfhaut-Analyse und Beratung",15]],doc:"Rechnung"}
       ]},
     handwerk:{label:"Handwerk",icon:"house",biz:"Demo Haustechnik",sub:"Sanitär · Heizung · Bad",obj:["Einsatzort:","Musterstraße 12"],sig:"Ihr Team von Demo Haustechnik",
       names:["Fam. Huber · Wartung","Hr. Engel · Bad","Fr. Fuchs · Therme","Hr. Kraus · Leck","Fr. Simon · Armatur","Hr. Ernst · Heizung","Fr. Busch · WC","Hr. Franke · Wartung"],
       svc:[
-        {k:"a",icon:"flame",label:"Heizung warten lassen",hint:"Kostenvoranschlag und Termin",ask:"unsere Gastherme müsste wieder gewartet werden. Wann können Sie kommen?",short:"Heizungswartung",n:2,pos:[["Material: Dichtungen, Filter",18],["Arbeit: Wartung Gastherme inkl. Abgasmessung",129]],doc:"Rechnung"},
-        {k:"b",icon:"drop",label:"Wasserhahn tauschen",hint:"Kostenvoranschlag und Termin",ask:"der Wasserhahn in der Küche tropft. Können Sie einen neuen einbauen?",short:"Wasserhahn tauschen",n:1,pos:[["Material: Einhebelmischer Küche",89],["Arbeit: Montage inkl. Anfahrt",75]],doc:"Rechnung"},
+        {k:"a",icon:"flame",label:"Heizung warten lassen",hint:"Nur Termin gewünscht",ask:"unsere Gastherme müsste wieder gewartet werden. Wann können Sie kommen?",short:"Heizungswartung",n:2,pos:[["Material: Dichtungen, Filter",18],["Arbeit: Wartung Gastherme inkl. Abgasmessung",129]],doc:"Rechnung"},
+        {k:"b",icon:"drop",label:"Wasserhahn tauschen",hint:"Fragt nach dem Preis: mit Kostenvoranschlag",kv:1,ask:"der Wasserhahn in der Küche tropft. Können Sie einen neuen einbauen, und was würde das ungefähr kosten?",short:"Wasserhahn tauschen",n:1,pos:[["Material: Einhebelmischer Küche",89],["Arbeit: Montage inkl. Anfahrt",75]],doc:"Rechnung"},
         {k:"c",icon:"warn",label:"Die Heizung macht Geräusche",hint:"Hier zeigt der Assistent seine Grenzen",ask:"unsere Heizung klopft und gluckert seit gestern. Ist das gefährlich?",short:"Heizungsprüfung",n:1,limit:"Das kann ich aus der Ferne nicht sicher beurteilen. Unser Monteur sieht sich das gern an. Wichtig: Wenn es nach Gas riecht, öffnen Sie sofort die Fenster, benutzen Sie keine Schalter und rufen Sie von draußen den Notdienst Ihres Gasversorgers an.",pos:[["Material: Entlüftungsventil",12],["Arbeit: Heizung prüfen und entlüften",79]],doc:"Kostenvoranschlag"}
       ]},
     kosmetik:{label:"Kosmetik",icon:"sparkle",biz:"Kosmetikstudio Demo",sub:"Pflege · Kosmetik · Wohlfühlen",obj:["Kosmetikerin:","Sarah"],sig:"Ihr Kosmetikstudio Demo",
       names:["Fr. Marx · Gesicht","Fr. Haas · Maniküre","Fr. Kühn · Wimpern","Fr. Pohl · Pediküre","Fr. Jung · Gesicht","Fr. Kaiser · Massage","Fr. Seidel · Brauen","Fr. Lorenz · Gesicht"],
       svc:[
-        {k:"a",icon:"sparkle",label:"Klassische Gesichtsbehandlung",hint:"Preis und Termin",ask:"ich würde gern eine klassische Gesichtsbehandlung buchen.",short:"Gesichtsbehandlung",n:1,pos:[["Gesichtsbehandlung klassisch, 60 Minuten",65]],doc:"Rechnung"},
-        {k:"b",icon:"hand",label:"Maniküre mit Lack",hint:"Preis und Termin",ask:"ich hätte gern eine Maniküre mit Lack. Was kostet das?",short:"Maniküre",n:1,pos:[["Maniküre inkl. Lack",35]],doc:"Rechnung"},
-        {k:"c",icon:"warn",label:"Ausschlag im Gesicht",hint:"Hier zeigt der Assistent seine Grenzen",ask:"ich habe seit ein paar Tagen roten Ausschlag im Gesicht. Können Sie mir helfen?",short:"Hautberatung",n:1,limit:"Einen Ausschlag kann ich aus der Ferne nicht beurteilen, und eine Behandlung ersetzt keinen Arztbesuch. Wenn er sich ausbreitet, juckt oder schmerzt, gehen Sie bitte zu einer Hautärztin. Gern sieht sich unsere Kosmetikerin Ihre Haut in einer Beratung an.",pos:[["Hautanalyse und Beratung",25]],doc:"Kostenvoranschlag"}
+        {k:"a",icon:"sparkle",label:"Klassische Gesichtsbehandlung",hint:"Nur Termin gewünscht",ask:"ich würde gern eine klassische Gesichtsbehandlung buchen.",short:"Gesichtsbehandlung",n:1,pos:[["Gesichtsbehandlung klassisch, 60 Minuten",65]],doc:"Rechnung"},
+        {k:"b",icon:"hand",label:"Maniküre mit Lack",hint:"Fragt nach dem Preis",price:1,ask:"ich hätte gern eine Maniküre mit Lack. Was kostet das?",short:"Maniküre",n:1,pos:[["Maniküre inkl. Lack",35]],doc:"Rechnung"},
+        {k:"c",icon:"warn",label:"Ausschlag im Gesicht",hint:"Hier zeigt der Assistent seine Grenzen",ask:"ich habe seit ein paar Tagen roten Ausschlag im Gesicht. Können Sie mir helfen?",short:"Hautberatung",n:1,limit:"Einen Ausschlag kann ich aus der Ferne nicht beurteilen, und eine Behandlung ersetzt keinen Arztbesuch. Wenn er sich ausbreitet, juckt oder schmerzt, gehen Sie bitte zu einer Hautärztin. Gern sieht sich unsere Kosmetikerin Ihre Haut in einer Beratung an.",pos:[["Hautanalyse und Beratung",25]],doc:"Rechnung"}
       ]}
   };
   var ORDER=["werkstatt","friseur","handwerk","kosmetik"];
@@ -511,10 +511,27 @@ footer a:hover{text-decoration:underline}
   function para(m,t){var p=el("p","",t);m.appendChild(p);return p}
   function typing(txt,ms,cb){var t=el("div","typing",txt);$("chat").appendChild(t);setTimeout(function(){t.remove();cb()},ms)}
   function svc(){return B[branch].svc.filter(function(s){return s.k===state.key})[0]}
-  function salutation(){return "Guten Tag "+state.name+","}
+  /* Anrede: nur Vorname -> "Hallo Anna", voller Name -> "Hallo Frau Müller" */
+  var FEM=" anna anne annette andrea angelika anja antje barbara bettina birgit brigitte carina christa christina christine claudia clara daniela doris elena elisabeth elke emilia emma erika eva franziska gabriele gisela hanna hannah heike helga ines ingrid iris jana janine jennifer johanna julia jutta karin katharina kathrin katja kerstin laura lea lena lisa luisa manuela maria marie marina marion martina melanie michaela mia monika nadine natalie nicole nina petra renate ruth sabine sandra sarah sara silke simone sonja stefanie susanne svenja tanja ursula ute vanessa verena yvonne ";
+  var MAS=" alexander andreas axel bernd christian daniel david dennis dieter dirk erik felix florian frank georg gerhard hans harald heinz helmut jan jens jonas jörg jürgen kai karl klaus lars leon lukas luca manfred marc marco mario markus martin matthias max michael niklas nico noah ole oliver patrick paul peter philipp ralf rainer robert sascha sebastian stefan steffen sven thomas tim tobias torsten uwe uwe walter werner wolfgang ";
+  function cap(w){return w?w.charAt(0).toUpperCase()+w.slice(1):w}
+  function gender(first){var f=" "+first.toLowerCase()+" ";if(FEM.indexOf(f)>-1)return"f";if(MAS.indexOf(f)>-1)return"m";
+    var l=first.toLowerCase();if(/(a|ine|ie|ette|elle)$/.test(l))return"f";return"";}
+  function nameParts(){
+    var w=state.name.replace(/[,.;]/g," ").split(/\s+/).filter(Boolean);
+    if(w.length&&/^(frau|herr)$/i.test(w[0])&&w.length>1)return{title:/^frau$/i.test(w[0])?"Frau":"Herr",last:w.slice(1).map(cap).join(" ")};
+    if(w.length===1)return{first:cap(w[0])};
+    var g=gender(w[0]);return{first:cap(w[0]),last:w.slice(1).map(cap).join(" "),title:g==="f"?"Frau":g==="m"?"Herr":""};
+  }
+  function addressName(){var n=nameParts();if(!n.last)return n.first;return n.title?n.title+" "+n.last:n.first+" "+n.last}
+  function salutation(){var n=nameParts();return(n.last&&!n.title?"Guten Tag ":"Hallo ")+addressName()+","}
+  function total(s){return s.pos.reduce(function(a,p){return a+p[1]},0)}
   function replyIntro(){
     var s=svc();
-    return s.limit?("vielen Dank für Ihre Nachricht. "+s.limit):("vielen Dank für Ihre Anfrage. Für „"+s.label+"“ habe ich Ihnen einen Kostenvoranschlag erstellt. Sie finden ihn im Anhang.");
+    if(s.limit)return "vielen Dank für Ihre Nachricht. "+s.limit;
+    if(s.kv)return "vielen Dank für Ihre Anfrage. Wie gewünscht habe ich Ihnen für „"+s.label+"“ einen Kostenvoranschlag erstellt. Sie finden ihn im Anhang.";
+    if(s.price)return "vielen Dank für Ihre Anfrage. „"+s.label+"“ kostet bei uns "+total(s)+" €.";
+    return "vielen Dank für Ihre Anfrage. Für „"+s.label+"“ habe ich gleich in unseren Kalender geschaut.";
   }
 
   function start(e){
@@ -569,7 +586,7 @@ footer a:hover{text-decoration:underline}
     document.querySelectorAll("#chat .hint").forEach(function(h){h.remove()});
     var a=bubble("in","Assistent · freigegeben von Ihnen");
     para(a,salutation());para(a,state.intro);
-    if(!s.limit){var ch=el("button","att");ch.type="button";ch.appendChild(el("i","","PDF"));ch.appendChild(el("span","",docInfo("Kostenvoranschlag").file));
+    if(s.kv){var ch=el("button","att");ch.type="button";ch.appendChild(el("i","","PDF"));ch.appendChild(el("span","",docInfo("Kostenvoranschlag").file));
       ch.addEventListener("click",function(){openDoc("Kostenvoranschlag",ch)});a.appendChild(ch);}
     para(a,"Diese Termine sind frei. Klicken Sie einfach auf den passenden:");
     var box=el("div","slots");
@@ -577,7 +594,7 @@ footer a:hover{text-decoration:underline}
     a.appendChild(box);para(a,"Freundliche Grüße, "+B[branch].sig);
     setRole("kunde");
     $("chat").appendChild(el("div","hint","Jetzt sind Sie wieder der Kunde: Wählen Sie einen Termin, hier oder im Kalender."));
-    addMail({sub:s.limit?"Ihre Anfrage: "+s.short:"Ihr Kostenvoranschlag: "+s.short,pre:salutation()+" "+state.intro,chip:s.limit?null:"PDF Kostenvoranschlag"});
+    addMail({sub:s.kv?"Ihr Kostenvoranschlag: "+s.short:"Ihre Anfrage: "+s.short,pre:salutation()+" "+state.intro,chip:s.kv?"PDF Kostenvoranschlag":null});
   }
 
   function choose(sl){
@@ -592,7 +609,7 @@ footer a:hover{text-decoration:underline}
     $("status").className="status ok";$("status").textContent="✓ Der Termin wurde in den Kalender eingetragen.";
     typing("Der Assistent schreibt …",900,function(){
       var a=bubble("in","Assistent");
-      para(a,"Vielen Dank, "+state.name+". Ihr Termin ist eingetragen: "+slotText(sl)+", "+s.short+".");
+      para(a,"Vielen Dank, "+addressName()+". Ihr Termin ist eingetragen: "+slotText(sl)+", "+s.short+".");
       para(a,"Am Tag vorher erinnern wir Sie per E-Mail. Freundliche Grüße, "+B[branch].sig);
       $("again").hidden=false;
       addMail({sub:"Termin bestätigt: "+slotText(sl),pre:s.short+" bei "+B[branch].biz+". Bis dann!",chip:"📅 Zum Kalender hinzufügen"});
@@ -701,15 +718,16 @@ footer a:hover{text-decoration:underline}
   $("tourStop").addEventListener("click",stopTour);
   $("tourBtn").addEventListener("click",function(){
     if(tourOn)return;tourOn=true;$("tour").hidden=false;reset();
-    say(1,"Sie sind ein Kunde der Demo-Werkstatt und möchten Ihre Winterreifen wechseln lassen.");
+    say(1,"Sie sind ein Kunde der Demo-Werkstatt und fragen, was eine kleine Wartung kostet.");
     if(branch!=="werkstatt")setBranch("werkstatt");
+    var rb=document.querySelector("input[name=svc][value=b]");if(rb){rb.checked=true;rb.dispatchEvent(new Event("change",{bubbles:true}))}
     spot($("postCard"));
     wait(1500).then(function(){return typeName("Anna Beispiel")})
     .then(function(){return wait(900)})
     .then(function(){spot($("send"));return wait(900)})
     .then(function(){$("f").requestSubmit?$("f").requestSubmit():start();say(2,"Der Assistent liest die Anfrage, schaut in den Kalender und schreibt einen Entwurf.");spot($("calCard"));return wait(3200)})
     .then(function(){say(3,"Jetzt sind Sie der Chef: Sie lesen den Entwurf und geben ihn mit einem Klick frei.");spot($("draft"));return wait(3800)})
-    .then(function(){var b=$("approve");if(b)b.click();say(4,"Der Kunde bekommt die Antwort mit Kostenvoranschlag und wählt einen Termin.");spot($("chat"));return wait(3200)})
+    .then(function(){var b=$("approve");if(b)b.click();say(4,"Weil der Kunde nach dem Preis gefragt hat, bekommt er die Antwort mit Kostenvoranschlag. Dann wählt er einen Termin.");spot($("chat"));return wait(3200)})
     .then(function(){var b=document.querySelector(".slots .slot");if(b)b.click();spot($("calCard"));return wait(2600)})
     .then(function(){say(5,"Fertig: Der Termin steht im Kalender, und der Kunde bekommt Bestätigung und Erinnerung aufs Handy.");spot($("phone"));return wait(5000)})
     .then(function(){spot(null);say(5,"Probieren Sie es jetzt selbst aus, auch mit einer anderen Branche.");return wait(4500)})
