@@ -424,7 +424,7 @@ footer a:hover{text-decoration:underline}
         {k:"b",icon:"wrench",label:"Kleine Wartung",hint:"Fragt nach dem Preis: mit Kostenvoranschlag",kv:1,ask:"mein Auto braucht eine kleine Wartung. Was kostet das und wann geht es?",short:"Kleine Wartung",n:3,pos:[["Material: Motoröl, Ölfilter, Luftfilter",79],["Arbeit: Kleine Wartung nach Herstellervorgabe",110]],doc:"Rechnung",g:"12 Monate Garantie auf die ausgeführte Arbeit."},
         {k:"c",icon:"warn",label:"Die Bremse macht Geräusche",hint:"Hier zeigt der Assistent seine Grenzen",ask:"meine Bremse quietscht seit ein paar Tagen. Können Sie sich das ansehen?",short:"Bremsenprüfung",n:1,limit:"Wenn die Bremse Geräusche macht, kann ich das aus der Ferne nicht beurteilen. Das muss sich unser Mechaniker ansehen. Bitte fahren Sie bis dahin vorsichtig. Lässt die Bremswirkung nach, fahren Sie nicht weiter und rufen Sie uns an.",pos:[["Material: Bremsbeläge vorn",68],["Arbeit: Bremsbeläge vorn wechseln",80]],doc:"Kostenvoranschlag"}
       ]},
-    friseur:{label:"Friseur",icon:"scissors",biz:"Salon Demo",sub:"Schnitt · Farbe · Styling",obj:["Stylistin:","Lena"],sig:"Ihr Team vom Salon Demo",
+    friseur:{label:"Friseur",icon:"scissors",biz:"Salon Demo",sub:"Schnitt · Farbe · Styling",obj:["Stylistin:","Lena"],sig:"Ihr Team vom Salon Demo",follow:{when:"in 6 Wochen",h:"Nächster Termin, automatisch",t:"Nach etwa sechs Wochen fragt der Assistent den Kunden, ob er wieder einen Termin möchte, gleich mit freien Zeiten.",sub:"Zeit für den nächsten Schnitt?",pre:"ihr letzter Besuch ist jetzt sechs Wochen her. Möchten Sie wieder einen Termin? Hier sind freie Zeiten für Sie."},
       names:["Fr. Wolf · Schnitt","Hr. Peters · Bart","Fr. Yilmaz · Farbe","Fr. Koch · Strähnen","Hr. Klein · Schnitt","Fr. Bauer · Föhnen","Fr. Arndt · Farbe","Hr. Vogel · Schnitt"],
       svc:[
         {k:"a",icon:"scissors",label:"Haare schneiden und föhnen",hint:"Nur Termin gewünscht",ask:"ich hätte gern einen Termin zum Schneiden und Föhnen.",short:"Schnitt und Föhnen",n:1,pos:[["Waschen, Schneiden, Föhnen (mittellanges Haar)",48]],doc:"Rechnung"},
@@ -438,7 +438,7 @@ footer a:hover{text-decoration:underline}
         {k:"b",icon:"drop",label:"Wasserhahn tauschen",hint:"Fragt nach dem Preis: mit Kostenvoranschlag",kv:1,ask:"der Wasserhahn in der Küche tropft. Können Sie einen neuen einbauen, und was würde das ungefähr kosten?",short:"Wasserhahn tauschen",n:1,pos:[["Material: Einhebelmischer Küche",89],["Arbeit: Montage inkl. Anfahrt",75]],doc:"Rechnung"},
         {k:"c",icon:"warn",label:"Die Heizung macht Geräusche",hint:"Hier zeigt der Assistent seine Grenzen",ask:"unsere Heizung klopft und gluckert seit gestern. Ist das gefährlich?",short:"Heizungsprüfung",n:1,limit:"Das kann ich aus der Ferne nicht sicher beurteilen. Unser Monteur sieht sich das gern an. Wichtig: Wenn es nach Gas riecht, öffnen Sie sofort die Fenster, benutzen Sie keine Schalter und rufen Sie von draußen den Notdienst Ihres Gasversorgers an.",pos:[["Material: Entlüftungsventil",12],["Arbeit: Heizung prüfen und entlüften",79]],doc:"Kostenvoranschlag"}
       ]},
-    kosmetik:{label:"Kosmetik",icon:"sparkle",biz:"Kosmetikstudio Demo",sub:"Pflege · Kosmetik · Wohlfühlen",obj:["Kosmetikerin:","Sarah"],sig:"Ihr Kosmetikstudio Demo",
+    kosmetik:{label:"Kosmetik",icon:"sparkle",biz:"Kosmetikstudio Demo",sub:"Pflege · Kosmetik · Wohlfühlen",obj:["Kosmetikerin:","Sarah"],sig:"Ihr Kosmetikstudio Demo",follow:{when:"in 4 Wochen",h:"Nächster Termin, automatisch",t:"Nach etwa vier Wochen fragt der Assistent die Kundin, ob sie wieder eine Behandlung möchte, gleich mit freien Zeiten.",sub:"Zeit für Ihre nächste Behandlung?",pre:"ihr letzter Besuch ist jetzt vier Wochen her. Gönnen Sie sich wieder eine Behandlung? Hier sind freie Zeiten für Sie."},
       names:["Fr. Marx · Gesicht","Fr. Haas · Maniküre","Fr. Kühn · Wimpern","Fr. Pohl · Pediküre","Fr. Jung · Gesicht","Fr. Kaiser · Massage","Fr. Seidel · Brauen","Fr. Lorenz · Gesicht"],
       svc:[
         {k:"a",icon:"sparkle",label:"Klassische Gesichtsbehandlung",hint:"Nur Termin gewünscht",ask:"ich würde gern eine klassische Gesichtsbehandlung buchen.",short:"Gesichtsbehandlung",n:1,pos:[["Gesichtsbehandlung klassisch, 60 Minuten",65]],doc:"Rechnung"},
@@ -617,6 +617,8 @@ footer a:hover{text-decoration:underline}
       setTimeout(function(){
         addMail({sub:"Erinnerung: morgen um "+sl.hour+":00 Uhr",pre:"Wir erinnern Sie an Ihren Termin morgen, "+dayLong(days[sl.day])+". Falls Sie nicht kommen können, antworten Sie einfach auf diese Mail.",chip:"1 Tag vorher, automatisch",time:"Vortag"});
         $("fl2").classList.add("done");
+        var f=B[branch].follow;
+        if(f)setTimeout(function(){addMail({sub:f.sub,pre:salutation()+" "+f.pre,chip:"📅 Freie Termine ansehen",time:f.when});$("fl3").classList.add("done")},1600);
       },1600);
     });
   }
@@ -624,6 +626,7 @@ footer a:hover{text-decoration:underline}
   function after(sl,s){
     $("fl1").classList.add("done");$("fl1t").textContent="„"+state.mineText+"“ steht jetzt im Kalender: "+slotText(sl)+".";
     $("fl2t").textContent="Einen Tag vor dem Termin bekommt "+state.name+" automatisch eine Erinnerung. Sie sehen sie links im Handy.";
+    if(B[branch].follow)return;
     state.docKind=s.doc;$("docBtn").hidden=false;$("fl3").classList.add("done");
     if(s.doc==="Rechnung"){$("fl3h").textContent="Rechnung als PDF";$("fl3t").textContent="Nach dem Termin geht die Rechnung automatisch als PDF an den Kunden, im Design Ihres Betriebs.";$("docBtn").textContent="Rechnung ansehen"}
     else{$("fl3h").textContent="Kostenvoranschlag als PDF";$("fl3t").textContent="Nach der Prüfung bekommt der Kunde einen Kostenvoranschlag als PDF, bevor etwas gemacht wird.";$("docBtn").textContent="Kostenvoranschlag ansehen"}
@@ -683,6 +686,11 @@ footer a:hover{text-decoration:underline}
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("ov").hidden)closeDoc()});
   $("docBtn").addEventListener("click",function(){openDoc(state.docKind,$("docBtn"))});
 
+  var IC_DOC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>';
+  var IC_AGAIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M9 15.5a3 3 0 1 0 1-2.2M9 12v2h2"/></svg>';
+  function fl3Default(){var f=B[branch].follow;$("fl3").querySelector(".ic").innerHTML=f?IC_AGAIN:IC_DOC;
+    if(f){$("fl3h").textContent=f.h;$("fl3t").textContent=f.t}
+    else{$("fl3h").textContent="Rechnung als PDF";$("fl3t").textContent="Nach dem Termin geht die Rechnung als PDF an den Kunden, im Design Ihres Betriebs."}}
   function reset(){
     state={};$("chat").textContent="";$("again").hidden=true;$("ov").hidden=true;
     $("send").disabled=false;$("nm").disabled=false;$("nm").value="";setRole("kunde");
@@ -692,7 +700,7 @@ footer a:hover{text-decoration:underline}
     ["fl1","fl2","fl3"].forEach(function(i){$(i).classList.remove("done")});
     $("fl1t").textContent="Sobald der Kunde einen Termin wählt, steht er in Ihrem Kalender.";
     $("fl2t").textContent="Einen Tag vorher bekommt der Kunde automatisch eine Erinnerung.";
-    $("fl3h").textContent="Rechnung als PDF";$("fl3t").textContent="Nach dem Termin geht die Rechnung als PDF an den Kunden, im Design Ihres Betriebs.";$("docBtn").hidden=true;
+    fl3Default();$("docBtn").hidden=true;
     renderChoices();buildDays();renderCal();
   }
   $("f").addEventListener("submit",start);
